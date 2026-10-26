@@ -1,0 +1,50 @@
+/.phpunit.cache
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+.env
+.env.backup
+.env.production
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+auth.json
+npm-debug.log
+yarn-error.log
+/.fleet
+/.idea
+/.vscode
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Local databases
+*.sqlite
+*.sqlite3
+
+# Local and potentially sensitive data
+/veri.json
+
+# Environment files
+.env.*
+!.env.example
+
+# Local backups
+*.bak
+*.backup
+# Docker runtime data
+/.docker/db/data/
+/.docker/logs/
+/.docker/redis/data/
+/.docker/phpmyadmin/sessions/
+
+# Temporary import files
+/test-import.json
+# Generated Filament assets
+/public/css/filament/
+/public/js/filament/
+/.git-starter-backup/
