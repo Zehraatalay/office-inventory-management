@@ -23,7 +23,7 @@ Route::middleware('auth:sanctum')->group(function () {
         $user = $request->user();
 
         if (
-            ! $user->currentAccessToken() instanceof \Laravel\Sanctum\PersonalAccessToken ||
+            ! ($user->currentAccessToken() instanceof \Laravel\Sanctum\PersonalAccessToken) ||
             ! $user->tokenCan('server:read') ||
             ! $user->can('viewAny', Asset::class)
         ) {
