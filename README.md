@@ -73,3 +73,25 @@ Protected endpoints use Laravel Sanctum authentication.
 Acknowledgments
 
 The Docker environment was initially based on the Laravel Docker Starter Kit by Refactorian and extended with the application’s inventory management features, administrative resources, and authorization logic.
+
+Administrator Role Setup
+
+After creating a Filament user, assign the super_admin role to enable access to the administration panel.
+
+Open Laravel Tinker:
+
+docker compose exec php php artisan tinker
+
+Assign the role to your administrator account:
+
+$user = \App\Models\User::where('email', 'admin@example.com')->firstOrFail();
+$user->assignRole('super_admin');
+
+Replace admin@example.com with the email address used during account creation.
+
+The application includes two predefined roles:
+
+* super_admin: Full administrative access.
+* Stajyer: Read-only access to asset records.
+
+Roles and permissions are initialized through the database seeder. No default administrator credentials are included.
