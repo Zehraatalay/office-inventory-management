@@ -40,25 +40,65 @@ Requirements
 
 Installation
 
+Clone the repository:
+
 git clone https://github.com/Zehraatalay/office-inventory-management.git
 cd office-inventory-management
+
+Create the environment configuration:
+
 cp .env.example .env
+
+Configure the database credentials and required environment variables in .env before starting the containers.
+
+Start the Docker environment:
+
 docker compose up -d --build
+
+Install dependencies and initialize the application:
+
 docker compose exec php composer install
 docker compose exec php php artisan key:generate
 docker compose exec php php artisan migrate
+docker compose exec php php artisan db:seed
 docker compose exec php php artisan filament:assets
 
-Configure your database credentials in .env before starting the containers.
+The database seeder initializes the application roles and permissions.
 
-Create an admin user:
+Administrator Setup
+
+Create a Filament administrator account:
 
 docker compose exec php php artisan make:filament-user
 
-Note: Admin panel access requires the appropriate role (super_admin or Stajyer). Assign roles and configure permissions before logging in.
+Assign the super_admin role to the newly created account.
 
-Access the admin panel at http://localhost:8000/admin.
+Open Laravel Tinker:
 
+docker compose exec php php artisan tinker
+
+Run the following commands, replacing admin@example.com with your administrator email address:
+
+$user = \App\Models\User::where('email', 'admin@example.com')->firstOrFail();
+$user->assignRole('super_admin');
+
+Exit Tinker:
+
+exit
+
+Available Roles
+
+Role	Access
+super_admin	Full administrative access
+Stajyer	Read-only access to asset records
+
+No default administrator credentials are included.
+
+Access
+
+Once the setup is complete, open the administration panel:
+
+http://localhost:8000/admin
 API Endpoints
 
 Method	Endpoint	Description
